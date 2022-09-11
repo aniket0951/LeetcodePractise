@@ -420,10 +420,11 @@ def mergeIntervals(intervals):
                 stack.append(intervals[i])
     return stack                            
 
-intervals = [[1,3],[2,6],[8,10],[15,18]]
+# intervals = [[1,3],[2,6],[8,10],[15,18]]
 # intervals = [[1,4],[4,5]]
 # intervals = [[1,4],[5,6]]
 # intervals = [[1,4],[0,0]]
+intervals = [[5,10],[6,8],[1,5],[2,3],[1,10]]
 print("Merge Intervals", mergeIntervals(intervals))
 
 def minPathSum(grid):
@@ -2162,14 +2163,45 @@ def maxProfit(prices,k):
                 max_profit[i] = temp
     return max_profit[k]                        
 
-k = 2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
+k = 2
 prices = [2,4,1]  
 k = 3
 prices = [4,3,8,6,0,5]  
 print("Best Time to Buy and Sell Stock IV", maxProfit(prices, k))
 
-def countColor(n):
-    arr = []
-    for i in range(n+1):
-        if i == 0:
-            
+def DistinctSum(nums):
+    n = len(nums)
+    dp = [0]
+    dp += nums
+    
+    # for i in range(1,n):    
+    #     j = 0 
+    #     temp = []
+    #     while j < len(dp):
+    #         sum_ = dp[j] + nums[i]
+    #         if sum_ not in dp: 
+    #             temp.append(sum_)
+    #         j += 1
+    #     dp += temp
+    #     print()
+    
+    sum_ = 0
+    nums.sort()
+    for i in range(n): 
+        sum_ += nums[i]
+        if sum_ not in dp: 
+            dp.append(sum_)
+
+    dp.sort()
+    return dp     
+
+nums = [1,2,3]
+nums = [1,2]
+nums = [5, 7, 1]
+# nums = [10]
+print("Find all distinct subset (or subsequence) sums", DistinctSum(nums))    
+
+intervals = [[5,10],[6,8],[1,5],[2,3],[1,10]]
+intervals.sort(key=lambda x:x[0])
+intervals.sort(key=lambda x:x[1])
+print(intervals)
