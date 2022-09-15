@@ -2201,7 +2201,143 @@ nums = [5, 7, 1]
 # nums = [10]
 print("Find all distinct subset (or subsequence) sums", DistinctSum(nums))    
 
-intervals = [[5,10],[6,8],[1,5],[2,3],[1,10]]
-intervals.sort(key=lambda x:x[0])
-intervals.sort(key=lambda x:x[1])
-print(intervals)
+def countSpecialNumbers(n: int) -> int:
+    ans = 0
+    if n <= 10:
+        return n
+    else:ans = 10        
+    
+    for i in range(11, n+1):
+        num = str(i)
+        k = len(num)
+        s = set(num)
+        if k == len(s):
+            ans += 1
+    return ans  
+
+n = 20
+n = 20
+n = 5
+n = 135
+# n = 2000000000
+print("Count Special Integers", countSpecialNumbers(n))    
+
+def minSubArrayLen(nums, target):
+    i=0
+    s=0
+    n=len(nums)
+    mini=1e9
+    for j in range(n):
+        s+=nums[j]
+        while s>=target:
+            mini=min(mini, j-i+1)
+            s-=nums[i]
+            i+=1
+    if mini==1e9:
+        return 0
+    return mini
+
+target = 7
+nums = [2,3,1,2,4,3]
+target = 4
+nums = [1,4,4]   
+target = 11
+nums = [1,1,1,1,1,1,1,1] 
+target = 12
+nums = [10,5,6,7,13,2]
+target = 213
+nums = [12,28,83,4,25,26,25,2,25,25,25,12]
+print("Minimum Size Subarray Sum", minSubArrayLen(nums, target))
+
+def longestCommonSubpath(path):
+    curr_path = path[0]
+    n = len(path)
+
+    for i in range(1, n):
+        j = 0 # point to curr_path
+        k = 0 # point for current index
+        temp = [] # store the new path
+
+        while j < len(curr_path) and k < len(path[i]):
+            if curr_path[j] == path[i][k]:
+                temp.append(path[i][k])
+                k += 1
+                j += 1
+            else:j += 1    
+            
+        print(temp)
+        print()
+    return curr_path
+
+paths = [[0,1,2,3,4],
+         [2,3,4],
+         [4,0,1,2,3]]
+
+print("Longest Common Subpath", longestCommonSubpath(paths))             
+
+def numberOfSubsequences(arr):
+        A = arr
+        r=[]
+
+        m=10**9 + 7
+
+        for i in A:
+
+            if i == 1:
+
+                r.append(i)
+
+            elif i == 2:
+
+                r.append(i)
+
+            elif i & (i-1) ==0:
+
+                r.append(i)
+
+        return ((2**len(r))-1)%m      
+
+def isPowerOfTwo (x):
+ 
+    # First x in the below expression
+    # is for the case when x is 0
+    return (x and (not(x & (x - 1))) )
+
+arr = [1, 6, 2]
+# arr = [3,5,7]
+# arr = [1,6,2,4]
+print("Power Of 2 and Subsequences", numberOfSubsequences(arr))   
+
+def findOriginalArray(arr):
+    n = len(arr)
+    if n % 2 != 0:
+        return [] 
+    else:
+        ans = []        
+        for i in range(n):
+            doub = arr[i] * 2 
+            if arr[i] == -1:
+                continue
+            elif doub in arr:
+                curr_ele = arr[i]
+                arr[i] = -1
+                if doub in arr:
+                 idx = arr.index(doub)
+                ans.append(curr_ele)
+                arr[i] = -1
+                arr[idx] = -1
+        for j in range(n):
+            if arr[j] != -1:
+                return []
+
+        return ans        
+
+changed = [6,3,0,1]
+# changed = [1,2,2,4]
+# changed = [4,6,2,3]
+# changed = [1,3,4,2,6,8]
+# changed =  [1,2,2,4,3]
+# changed =  [1]
+# changed = [2,4,4,2]
+# changed = [0,0,0,0]
+print("Find Original Array From Doubled Array", findOriginalArray(changed))    
